@@ -63,6 +63,15 @@ limitations under the License.
 	</organization>
 	
 	<dependencies>
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Compile dependencies -->
 		<dependency>
 			<groupId>com.agapsys.libs</groupId>
 			<artifactId>embedded-servlet-container</artifactId>
