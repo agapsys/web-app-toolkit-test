@@ -17,6 +17,7 @@
 package com.agapsys.web.toolkit;
 
 import com.agapsys.sevlet.container.ServletContextHandlerBuilder;
+import com.agapsys.sevlet.container.StacktraceErrorHandler;
 
 /**
  * Default ServletContainerBuilder for web-app-toolkit based applications.
@@ -36,7 +37,8 @@ public class ServletContainerBuilder extends com.agapsys.sevlet.container.Servle
 	public ServletContextHandlerBuilder addContext(String contextPath) {
 		ServletContextHandlerBuilder ctxHandlerBuilder = super.addContext(contextPath)
 			.registerEventListener(webApp)
-			.registerFilter(WebApplicationFilter.class, "/*");
+			.registerFilter(WebApplicationFilter.class, "/*")
+			.setErrorHandler(new StacktraceErrorHandler());
 		
 		return ctxHandlerBuilder;
 	}
