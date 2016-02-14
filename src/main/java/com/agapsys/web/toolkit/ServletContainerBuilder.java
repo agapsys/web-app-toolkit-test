@@ -25,16 +25,20 @@ import com.agapsys.sevlet.container.StacktraceErrorHandler;
  */
 public class ServletContainerBuilder extends com.agapsys.sevlet.container.ServletContainerBuilder {
 
-	private final AbstractWebApplication webApp;
+	private AbstractWebApplication webApp;
 	
-	public ServletContainerBuilder(AbstractWebApplication webApp) {
+	public ServletContextHandlerBuilder addContext(AbstractWebApplication webApp, String contextPath) {
 		if (webApp == null) throw new IllegalArgumentException("Null web application");
-		
 		this.webApp = webApp;
+		return addContext(contextPath);
+	}
+	
+	public final ServletContextHandlerBuilder addRootContext(AbstractWebApplication webApp) {
+		return addContext(webApp, ROOT_PATH);
 	}
 	
 	@Override
-	public ServletContextHandlerBuilder addContext(String contextPath) {
+	public final ServletContextHandlerBuilder addContext(String contextPath) {
 		ServletContextHandlerBuilder ctxHandlerBuilder = super.addContext(contextPath)
 			.registerEventListener(webApp)
 			.registerFilter(WebApplicationFilter.class, "/*")
