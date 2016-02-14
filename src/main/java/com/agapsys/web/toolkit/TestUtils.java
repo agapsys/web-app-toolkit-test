@@ -44,7 +44,7 @@ public class TestUtils {
 	protected TestUtils() {}
 	
 	/** 
-	 * Prints a message to console.
+	 * Prints a line message to console.
 	 * @param msg message to be print
 	 * @param msgArgs optional message arguments
 	 */
@@ -54,6 +54,20 @@ public class TestUtils {
 		
 		System.out.println(msg);
 	}
+	
+	/** 
+	 * Prints a message to console.
+	 * @param msg message to be print
+	 * @param msgArgs optional message arguments
+	 */
+	public void print(String msg, Object...msgArgs) {
+		if (msgArgs.length > 0)
+			msg = String.format(msg, msgArgs);
+		
+		System.out.print(msg);
+	}
+	
+	
 	
 	/**
 	 * Returns an UTC date at midnight according to parameters
