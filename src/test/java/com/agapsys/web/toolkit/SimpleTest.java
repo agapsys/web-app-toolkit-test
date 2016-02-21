@@ -54,11 +54,9 @@ public class SimpleTest {
 	
 	@Before
 	public void before() {
-		sc = new ServletContainerBuilder()
-			.addRootContext(MockedWebApplication.class)
-				.registerServlet(TestServlet.class)
-			.endContext()
-		.build();
+		sc = new ServletContainerBuilder(MockedWebApplication.class)
+			.registerServlet(TestServlet.class)
+			.build();
 		
 		sc.startServer();
 	}

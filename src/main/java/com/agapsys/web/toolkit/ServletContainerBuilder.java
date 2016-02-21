@@ -16,7 +16,6 @@
 
 package com.agapsys.web.toolkit;
 
-import com.agapsys.sevlet.container.ServletContextHandlerBuilder;
 import com.agapsys.sevlet.container.StacktraceErrorHandler;
 
 /**
@@ -27,23 +26,16 @@ public class ServletContainerBuilder extends com.agapsys.sevlet.container.Servle
 
 	private Class<? extends AbstractWebApplication> webApp;
 	
-	public ServletContextHandlerBuilder addContext(Class<? extends AbstractWebApplication> webApp, String contextPath) {
-		if (webApp == null) throw new IllegalArgumentException("Null web application");
-		this.webApp = webApp;
-		return addContext(contextPath);
-	}
-	
-	public final ServletContextHandlerBuilder addRootContext(Class<? extends AbstractWebApplication>  webApp) {
-		return addContext(webApp, ROOT_PATH);
-	}
-	
-	@Override
-	public final ServletContextHandlerBuilder addContext(String contextPath) {
-		ServletContextHandlerBuilder ctxHandlerBuilder = super.addContext(contextPath)
-			.registerEventListener(webApp)
-			.registerFilter(WebApplicationFilter.class, "/*")
-			.setErrorHandler(new StacktraceErrorHandler());
+	private void registerWebApplication(Class<? extends AbstractWebApplication> webApp) {
+		if (webApp == null)
+			throw new IllegalArgumentException("Null web application");
 		
-		return ctxHandlerBuilder;
+		super.registerEventListener(webApp);
+		super.registerFilter(WebApplicationFilter.class, "/*");
+		super.setErrorHandler(new StacktraceErrorHandler());
+	}
+	
+	public ServletContainerBuilder(Class<? extends AbstractWebApplication> webApp) {
+		registerWebApplication(webApp);
 	}
 }
