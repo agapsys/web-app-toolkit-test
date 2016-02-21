@@ -23,8 +23,6 @@ import com.agapsys.sevlet.container.StacktraceErrorHandler;
  * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class ServletContainerBuilder extends com.agapsys.sevlet.container.ServletContainerBuilder {
-
-	private Class<? extends AbstractWebApplication> webApp;
 	
 	private void registerWebApplication(Class<? extends AbstractWebApplication> webApp) {
 		if (webApp == null)
