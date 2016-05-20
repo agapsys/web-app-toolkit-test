@@ -17,6 +17,7 @@ package com.agapsys.web.toolkit;
 
 import com.agapsys.web.toolkit.modules.PersistenceModule;
 
+@Deprecated
 public class MockedPersistenceModule extends PersistenceModule {
 	// STATIC SCOPE ============================================================
 	public static final String DEFAULT_PERSISTENCE_UNIT_NAME = "test";
