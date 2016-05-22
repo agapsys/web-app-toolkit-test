@@ -30,20 +30,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TestUtils {
 	// STATIC SCOPE ============================================================
-	private static TestUtils singleton = null;
-	
+	private static final TestUtils SINGLETON = new TestUtils();;
+
 	public static TestUtils getInstance() {
-		if (singleton == null)
-			singleton = new TestUtils();
-		
-		return singleton;
+		return SINGLETON;
 	}
 	// =========================================================================
-	
+
 	// INSTANCE SCOPE ==========================================================
 	protected TestUtils() {}
-	
-	/** 
+
+	/**
 	 * Prints a line message to console.
 	 * @param msg message to be print
 	 * @param msgArgs optional message arguments
@@ -51,11 +48,11 @@ public class TestUtils {
 	public void println(String msg, Object...msgArgs) {
 		if (msgArgs.length > 0)
 			msg = String.format(msg, msgArgs);
-		
+
 		System.out.println(msg);
 	}
-	
-	/** 
+
+	/**
 	 * Prints a message to console.
 	 * @param msg message to be print
 	 * @param msgArgs optional message arguments
@@ -63,12 +60,12 @@ public class TestUtils {
 	public void print(String msg, Object...msgArgs) {
 		if (msgArgs.length > 0)
 			msg = String.format(msg, msgArgs);
-		
+
 		System.out.print(msg);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Returns an UTC date at midnight according to parameters
 	 * @param year date year
@@ -85,15 +82,15 @@ public class TestUtils {
 			throw new RuntimeException(ex);
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Return the instance of running application
 	 * @return running application instance.
 	 */
 	public AbstractWebApplication getRunningApplication() {
 		return AbstractWebApplication.getRunningInstance();
 	}
-	
+
 	/**
 	 * Returns a module used by running application
 	 * @param <T> module type
@@ -103,7 +100,7 @@ public class TestUtils {
 	public <T extends Module> T getApplicationModule(Class<T> moduleClass) {
 		return getRunningApplication().getModule(moduleClass);
 	}
-	
+
 	/**
 	 * Returns a service used by running application
 	 * @param <T> module type
@@ -113,7 +110,7 @@ public class TestUtils {
 	public <T extends Service> T getApplicationService(Class<T> serviceClass) {
 		return getRunningApplication().getService(serviceClass);
 	}
-	
+
 	/**
 	 * Checks if two strings are equals with parameterized case-sensitivity
 	 * @param str1 first string
@@ -127,7 +124,7 @@ public class TestUtils {
 		else
 			return str1.equals(str2);
 	}
-	
+
 	/**
 	 * Returns a boolean indicating if a string collection contains a string with parameterized case-sensitivity
 	 * @param strCollection string collection
@@ -140,10 +137,10 @@ public class TestUtils {
 			if (strEquals(_str, str, ignoreCase))
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Asserts a server response status code
 	 * @param expected expected status code
@@ -152,10 +149,10 @@ public class TestUtils {
 	public void assertStatus(int expected, StringResponse resp) {
 		if (expected != HttpServletResponse.SC_INTERNAL_SERVER_ERROR && resp.getStatusCode() == HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
 			throw new RuntimeException(String.format("Internal Server error. Server response:\n%s", resp.getContentString()));
-		
+
 		assert expected == resp.getStatusCode() : String.format("Expected %d. Returned: %d", expected, resp.getStatusCode());
 	}
-	
+
 	/**
 	 * Asserts both server response status code and response contents
 	 * @param expectedStatus expected status code
@@ -164,11 +161,11 @@ public class TestUtils {
 	 */
 	public void assertErrorStatus(int expectedStatus, String expectedResponseContent, StringResponse resp) {
 		assertStatus(expectedStatus, resp);
-		
+
 		assert expectedResponseContent.equals(resp.getContentString()) : String.format("Expected \"%s\". Returned: \"%s\"", expectedResponseContent, resp.getContentString());
 	}
-	
-	/** 
+
+	/**
 	 * Performs a pause during test execution
 	 * @param interval pause interval (in milliseconds)
 	 * @param message message
@@ -176,7 +173,7 @@ public class TestUtils {
 	 */
 	public void pause(long interval, String message, Object...msgArgs) {
 		println(message, msgArgs);
-		
+
 		try {
 			Object syncObject = new Object();
 			synchronized(syncObject) {
