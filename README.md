@@ -10,11 +10,6 @@ The first build may take a long time as Maven downloads all the dependencies.
 
 ## Dependencies
 
-Web Application Toolkit - Testing Framework project requires Java 7 compatible runtime and depends on the following external libraries:
-
-* Agapsys Web Application Toolkit (https://github.com/agapsys/web-app-toolkit)
-* Agapsys Embedded Servlet Container (https://github.com/agapsys/embedded-servlet-container)
-
 For detailed information on external dependencies please see *pom.xml*.
 
 ## Licensing
