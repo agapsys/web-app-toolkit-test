@@ -87,8 +87,8 @@ public class TestUtils {
 	 * Return the instance of running application
 	 * @return running application instance.
 	 */
-	public AbstractWebApplication getRunningApplication() {
-		return AbstractWebApplication.getRunningInstance();
+	public AbstractApplication getRunningApplication() {
+		return AbstractApplication.getRunningInstance();
 	}
 
 	/**
