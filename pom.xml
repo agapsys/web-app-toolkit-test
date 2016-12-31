@@ -79,7 +79,7 @@ limitations under the License.
 		</dependency>
 		<dependency>
 			<groupId>com.agapsys</groupId>
-			<artifactId>web-app-toolkit</artifactId>
+			<artifactId>web-app-toolkit-core</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
