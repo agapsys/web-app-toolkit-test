@@ -30,10 +30,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- *
- * @author Leandro Oliveira (leandro@agapsys.com)
- */
 public class SimpleTest {
     // STATIC SCOPE ============================================================
     @WebServlet("/*")
@@ -46,26 +42,26 @@ public class SimpleTest {
         }
     }
     // =========================================================================
-    
+
     // INSTANCE SCOPE ==========================================================
     private final TestUtils testUtils = TestUtils.getInstance();
-    
+
     private ServletContainer sc;
-    
+
     @Before
     public void before() {
         sc = new ServletContainerBuilder(MockedWebApplication.class)
             .registerServlet(TestServlet.class)
             .build();
-        
+
         sc.startServer();
     }
-    
+
     @After
     public void after() {
         sc.stopServer();
     }
-    
+
     @Test
     public void simpleTest() {
         HttpResponse.StringResponse resp = sc.doRequest(new HttpGet("/test-url"));
@@ -73,5 +69,5 @@ public class SimpleTest {
         Assert.assertEquals("/test-url", resp.getContentString());
     }
     // =========================================================================
-    
+
 }
