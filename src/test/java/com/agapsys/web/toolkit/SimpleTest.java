@@ -35,43 +35,43 @@ import org.junit.Test;
  * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class SimpleTest {
-	// STATIC SCOPE ============================================================
-	@WebServlet("/*")
-	public static class TestServlet extends HttpServlet {
+    // STATIC SCOPE ============================================================
+    @WebServlet("/*")
+    public static class TestServlet extends HttpServlet {
 
-		@Override
-		protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			resp.setStatus(200);
-			resp.getWriter().print(req.getPathInfo());
-		}
-	}
-	// =========================================================================
-	
-	// INSTANCE SCOPE ==========================================================
-	private final TestUtils testUtils = TestUtils.getInstance();
-	
-	private ServletContainer sc;
-	
-	@Before
-	public void before() {
-		sc = new ServletContainerBuilder(MockedWebApplication.class)
-			.registerServlet(TestServlet.class)
-			.build();
-		
-		sc.startServer();
-	}
-	
-	@After
-	public void after() {
-		sc.stopServer();
-	}
-	
-	@Test
-	public void simpleTest() {
-		HttpResponse.StringResponse resp = sc.doRequest(new HttpGet("/test-url"));
-		testUtils.assertStatus(200, resp);
-		Assert.assertEquals("/test-url", resp.getContentString());
-	}
-	// =========================================================================
-	
+        @Override
+        protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            resp.setStatus(200);
+            resp.getWriter().print(req.getPathInfo());
+        }
+    }
+    // =========================================================================
+    
+    // INSTANCE SCOPE ==========================================================
+    private final TestUtils testUtils = TestUtils.getInstance();
+    
+    private ServletContainer sc;
+    
+    @Before
+    public void before() {
+        sc = new ServletContainerBuilder(MockedWebApplication.class)
+            .registerServlet(TestServlet.class)
+            .build();
+        
+        sc.startServer();
+    }
+    
+    @After
+    public void after() {
+        sc.stopServer();
+    }
+    
+    @Test
+    public void simpleTest() {
+        HttpResponse.StringResponse resp = sc.doRequest(new HttpGet("/test-url"));
+        testUtils.assertStatus(200, resp);
+        Assert.assertEquals("/test-url", resp.getContentString());
+    }
+    // =========================================================================
+    
 }

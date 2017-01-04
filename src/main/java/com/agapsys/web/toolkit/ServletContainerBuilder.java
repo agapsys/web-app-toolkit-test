@@ -23,17 +23,17 @@ import com.agapsys.sevlet.container.StacktraceErrorHandler;
  * @author Leandro Oliveira (leandro@agapsys.com)
  */
 public class ServletContainerBuilder<T extends ServletContainerBuilder> extends com.agapsys.sevlet.container.ServletContainerBuilder<T> {
-	
-	private void registerWebApplication(Class<? extends AbstractWebApplication> webApp) {
-		if (webApp == null)
-			throw new IllegalArgumentException("Null web application");
-		
-		super.registerEventListener(webApp);
-		super.registerFilter(WebApplicationFilter.class, "/*");
-		super.setErrorHandler(new StacktraceErrorHandler());
-	}
-	
-	public ServletContainerBuilder(Class<? extends AbstractWebApplication> webApp) {
-		registerWebApplication(webApp);
-	}
+    
+    private void registerWebApplication(Class<? extends AbstractWebApplication> webApp) {
+        if (webApp == null)
+            throw new IllegalArgumentException("Null web application");
+        
+        super.registerEventListener(webApp);
+        super.registerFilter(WebApplicationFilter.class, "/*");
+        super.setErrorHandler(new StacktraceErrorHandler());
+    }
+    
+    public ServletContainerBuilder(Class<? extends AbstractWebApplication> webApp) {
+        registerWebApplication(webApp);
+    }
 }
