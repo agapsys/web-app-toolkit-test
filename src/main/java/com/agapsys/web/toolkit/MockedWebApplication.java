@@ -24,7 +24,7 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class MockedWebApplication extends AbstractWebApplication {
-    
+
     @Override
     public String getRootName() {
         return "test-app";
@@ -47,21 +47,21 @@ public class MockedWebApplication extends AbstractWebApplication {
     @Override
     protected void afterStop() {
         super.afterStop();
-        
+
         try {
             FileUtils.deleteFile(getDirectory().getParentFile());
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
+
     }
 
     @Override
     protected void beforeStart() {
         super.beforeStart();
-        
+
         LogService customLogService = new LogService();
-        customLogService.addLogger(new LogService.ConsoleLogger());
+        customLogService.addLogger(new LogService.ConsoleLogger(true));
         registerService(customLogService);
     }
 
